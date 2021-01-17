@@ -14,12 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class NetworkCall {
+
     private static final String TAG = "NetworkCall";
-    int TIMEOUT_MILLISEC = 30000;
     private JSONObject mJson;
     private AsyncTaskInterface mAsyncTaskInterface;
     private String mUrl;
-    private String mCallingId;
+    int TIMEOUT_MILLISEC = 30000;
 
     public NetworkCall(JSONObject json, AsyncTaskInterface asyncTaskInterface, String url) {
         mJson = json;
