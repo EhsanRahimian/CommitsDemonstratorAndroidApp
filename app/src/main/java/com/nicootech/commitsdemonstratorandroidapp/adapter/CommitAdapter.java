@@ -31,7 +31,7 @@ public class CommitAdapter extends  RecyclerView.Adapter<CommitAdapter.MyViewHol
             author_name = itemView.findViewById(R.id.author_name);
             message = itemView.findViewById(R.id.message);
         }
-        
+
     }
 
     public CommitAdapter(Context context, List<Commit> commits, int layout) {
@@ -45,7 +45,9 @@ public class CommitAdapter extends  RecyclerView.Adapter<CommitAdapter.MyViewHol
     @NonNull
     @Override
     public CommitAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(mLayout,parent,false);
+        return new CommitAdapter.MyViewHolder(itemView);
     }
 
     @Override
