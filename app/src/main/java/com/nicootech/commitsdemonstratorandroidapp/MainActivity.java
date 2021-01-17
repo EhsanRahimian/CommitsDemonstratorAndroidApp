@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.nicootech.commitsdemonstratorandroidapp.adapter.CommitAdapter;
@@ -55,6 +56,13 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
     }
     @Override
     public void onTaskCompleted(String response, String urlIdentifier) {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+
+            mProgressDialog.dismiss();
+        }
+
+        Log.d(TAG, "Resposnes : "+response);
+
         try {
             JSONArray jsonArray = new JSONArray(response);
             // Logic to fetch 25 commits only latest.
