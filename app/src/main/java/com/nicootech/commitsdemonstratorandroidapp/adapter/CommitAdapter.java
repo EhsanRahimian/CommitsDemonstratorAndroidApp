@@ -52,12 +52,15 @@ public class CommitAdapter extends  RecyclerView.Adapter<CommitAdapter.MyViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.sha.setText(mCommits.get(position).getmSha());
+        holder.author_name.setText(mCommits.get(position).getmAuthor());
+        holder.message.setText(mCommits.get(position).getmMessage());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mCommits.size();
     }
 
 
