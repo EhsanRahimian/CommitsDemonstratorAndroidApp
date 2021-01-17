@@ -14,6 +14,9 @@ import com.nicootech.commitsdemonstratorandroidapp.network.AsyncTaskInterface;
 import com.nicootech.commitsdemonstratorandroidapp.network.NetworkCall;
 import com.nicootech.commitsdemonstratorandroidapp.network.NetworkTags;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
     private ProgressDialog mProgressDialog;
     private List<Commit> mCommitList;
     private RecyclerView mRecyclerView;
-    private CommitAdapter mCommitListAdapter;
+    private CommitAdapter mCommitAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,10 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
 
         //Adapter initializing
         mCommitList = new ArrayList<>();
-        mCommitListAdapter = new CommitAdapter(this, mCommitList, R.layout.row_item);
+        mCommitAdapter = new CommitAdapter(this, mCommitList, R.layout.row_item);
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mCommitListAdapter);
+        mRecyclerView.setAdapter(mCommitAdapter);
     }
     private void getCommitsData() {
 
@@ -52,6 +55,20 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
     }
     @Override
     public void onTaskCompleted(String response, String urlIdentifier) {
+        try {
+            JSONArray jsonArray = new JSONArray(response);
+            // Logic to fetch 25 commits only latest.
+            for (int i=0;i<25;i++) {
+                Commit newCommit = new Commit();
+                newCommit.setmSha(jsonArray.getJSONObject(i).getString("sha"));
+                newCommit.setmAuthor(jsonArray.getJSONObject(i).getJSONObject("commit").getJSONObject("author").getString("name"));
+                newCommit.setmMessage(jsonArray.getJSONObject(i).getJSONObject("commit").getString("message"));
+                mCommitList.add(newCommit);
+            }
+            mCommitAdapter.notifyDataSetChanged();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 }
