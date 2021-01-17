@@ -8,13 +8,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.nicootech.commitsdemonstratorandroidapp.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class NetworkCall {
     private static final String TAG = "NetworkCall";
-
+    int TIMEOUT_MILLISEC = 30000;
     private JSONObject mJson;
     private AsyncTaskInterface mAsyncTaskInterface;
     private String mUrl;
@@ -59,6 +60,13 @@ public class NetworkCall {
                     }
                 }
         );
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                TIMEOUT_MILLISEC,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
     }
 
 }
