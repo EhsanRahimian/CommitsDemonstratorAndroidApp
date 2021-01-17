@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
         setContentView(R.layout.activity_main);
         //commit change test
     }
-
     @Override
     public void onTaskCompleted(String response, String urlIdentifier) {
 
