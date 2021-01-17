@@ -1,9 +1,12 @@
 package com.nicootech.commitsdemonstratorandroidapp.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.nicootech.commitsdemonstratorandroidapp.R;
 import com.nicootech.commitsdemonstratorandroidapp.model.Commit;
 
 import java.util.List;
@@ -17,15 +20,25 @@ public class CommitAdapter extends  RecyclerView.Adapter<CommitAdapter.MyViewHol
     private int mLayout;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
+
+        public TextView sha;
+        public TextView author_name;
+        public TextView message;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            sha = itemView.findViewById(R.id.sha);
+            author_name = itemView.findViewById(R.id.author_name);
+            message = itemView.findViewById(R.id.message);
         }
-
-
+        
     }
 
     public CommitAdapter(Context context, List<Commit> commits, int layout) {
-
+        this.mCommits = commits;
+        this.mContext = context;
+        mLayout = layout;
+        LayoutInflater mInflater = LayoutInflater.from(context);
     }
 
 
