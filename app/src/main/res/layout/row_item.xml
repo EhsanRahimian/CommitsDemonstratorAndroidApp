@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/cardViewBack"
+        android:orientation="vertical"
         android:padding="4dp">
 
         <TextView
@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:padding="3dp"
             android:textColor="#FF3C00"
-            android:textStyle="normal"
             android:textSize="15sp"
+            android:textStyle="normal"
             tools:text="message" />
 
         <TextView
@@ -29,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:textSize="15sp"
             android:textColor="#326C22"
+            android:textSize="15sp"
             android:textStyle="bold"
             tools:text="author" />
 
