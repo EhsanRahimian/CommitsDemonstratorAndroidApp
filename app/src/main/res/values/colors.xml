@@ -6,4 +6,7 @@
     <color name="cardViewBack">#6AA2AFAF</color>
     <color name="recyclerBack">#75818F</color>
     <color name="fetchbBtn">#FFFFFF</color>
+    <color name="message">#FF3C00</color>
+    <color name="sha">#364FDA</color>
+    <color name="author">#326C22</color>
 </resources>

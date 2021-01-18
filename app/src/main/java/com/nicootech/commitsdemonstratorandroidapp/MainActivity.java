@@ -3,7 +3,6 @@ package com.nicootech.commitsdemonstratorandroidapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,20 +11,16 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
-
 import com.nicootech.commitsdemonstratorandroidapp.adapter.CommitAdapter;
 import com.nicootech.commitsdemonstratorandroidapp.model.Commit;
 import com.nicootech.commitsdemonstratorandroidapp.network.AsyncTaskInterface;
 import com.nicootech.commitsdemonstratorandroidapp.network.NetworkCall;
 import com.nicootech.commitsdemonstratorandroidapp.network.NetworkTags;
 import com.nicootech.commitsdemonstratorandroidapp.utils.Utility;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (internetConnectionCheck(MainActivity.this)) {
 
+        if (internetConnectionCheck(MainActivity.this)) {
 
               final Toast toast =Toast.makeText(getApplicationContext(), "Internet Connection is available !!!", Toast.LENGTH_LONG);
               toast.show();
@@ -52,13 +47,9 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
                     public void run() {
                         toast.cancel();
                     }
-
               }, 1200);
               initializeViews();
-
-        } else
-
-        {
+        } else {
             Toast.makeText(getApplicationContext(), "No Internet Connection Try Later !", Toast.LENGTH_LONG).show();
         }
 
@@ -85,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
     }
     @Override
     public void onTaskCompleted(String response, String urlIdentifier) {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
 
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
 
@@ -94,13 +85,23 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
 
         try {
             JSONArray jsonArray = new JSONArray(response);
-            // Logic to fetch 25 commits only latest.
-            for (int i=0;i<25;i++) {
+            /** Logic to fetch 25 recent commits.
+             * As I understood the task is to show the last 25 recent commits,
+             * But if the number of commit are less than 25,
+             * the app shows the exact number if the number is more than 25,
+             * the app shows only 25 commits
+             */
+            for (int i=0;i<jsonArray.length();i++) {
+
                 Commit newCommit = new Commit();
                 newCommit.setmSha("Commit Hash: "+jsonArray.getJSONObject(i).getString("sha"));
                 newCommit.setmAuthor("Author: "+jsonArray.getJSONObject(i).getJSONObject("commit").getJSONObject("author").getString("name"));
                 newCommit.setmMessage("Message: "+jsonArray.getJSONObject(i).getJSONObject("commit").getString("message"));
                 mCommitList.add(newCommit);
+                if(i==24){
+                    break;
+                }
+
             }
             mCommitAdapter.notifyDataSetChanged();
         } catch (JSONException e) {
@@ -108,17 +109,18 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
         }
 
     }
+    // Checking Internet Connection
     public static boolean internetConnectionCheck(Activity CurrentActivity) {
-        Boolean Connected = false;
+        boolean Connected = false;
         ConnectivityManager connectivity = (ConnectivityManager) CurrentActivity.getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null) for (int i = 0; i < info.length; i++)
-                if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+            for (NetworkInfo networkInfo : info)
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                     Log.e("My Network is: ", "Connected");
                     Connected = true;
-                } else {}
+                }
         } else {
             Log.e("My Network is: ", "Not Connected");
 

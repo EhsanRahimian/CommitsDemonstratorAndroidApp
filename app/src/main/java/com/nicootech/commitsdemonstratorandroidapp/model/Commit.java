@@ -24,7 +24,7 @@ public class Commit {
         return mMessage;
     }
 
-    public void setmMessage(String mMeesage) {
-        this.mMessage = mMeesage;
+    public void setmMessage(String mMessage) {
+        this.mMessage = mMessage;
     }
 }

@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:textColor="#FF3C00"
+            android:textColor="@color/message"
             android:textSize="15sp"
             android:textStyle="normal"
             tools:text="message" />
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:textColor="#326C22"
+            android:textColor="@color/author"
             android:textSize="15sp"
             android:textStyle="bold"
             tools:text="author" />
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:textColor="#364FDA"
+            android:textColor="@color/sha"
             android:textStyle="italic"
             tools:text="sha" />
 

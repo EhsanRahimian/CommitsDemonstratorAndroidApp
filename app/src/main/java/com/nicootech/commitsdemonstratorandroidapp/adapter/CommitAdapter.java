@@ -38,7 +38,6 @@ public class CommitAdapter extends  RecyclerView.Adapter<CommitAdapter.MyViewHol
         this.mCommits = commits;
         this.mContext = context;
         mLayout = layout;
-        LayoutInflater mInflater = LayoutInflater.from(context);
     }
 
 
