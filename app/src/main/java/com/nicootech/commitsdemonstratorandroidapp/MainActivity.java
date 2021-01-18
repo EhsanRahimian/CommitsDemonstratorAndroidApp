@@ -61,16 +61,16 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
             mProgressDialog.dismiss();
         }
 
-        Log.d(TAG, "Resposnes : "+response);
+        Log.d(TAG, "Responses : "+response);
 
         try {
             JSONArray jsonArray = new JSONArray(response);
             // Logic to fetch 25 commits only latest.
-            for (int i=0;i<25;i++) {
+            for (int i=0;i<15;i++) {
                 Commit newCommit = new Commit();
-                newCommit.setmSha(jsonArray.getJSONObject(i).getString("sha"));
-                newCommit.setmAuthor(jsonArray.getJSONObject(i).getJSONObject("commit").getJSONObject("author").getString("name"));
-                newCommit.setmMessage(jsonArray.getJSONObject(i).getJSONObject("commit").getString("message"));
+                newCommit.setmSha("HashCode: "+jsonArray.getJSONObject(i).getString("sha"));
+                newCommit.setmAuthor("Author: "+jsonArray.getJSONObject(i).getJSONObject("commit").getJSONObject("author").getString("name"));
+                newCommit.setmMessage("Message: "+jsonArray.getJSONObject(i).getJSONObject("commit").getString("message"));
                 mCommitList.add(newCommit);
             }
             mCommitAdapter.notifyDataSetChanged();
