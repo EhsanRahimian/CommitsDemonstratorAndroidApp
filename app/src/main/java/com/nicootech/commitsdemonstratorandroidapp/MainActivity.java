@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements AsyncTaskInterfac
             // Logic to fetch 25 commits only latest.
             for (int i=0;i<15;i++) {
                 Commit newCommit = new Commit();
-                newCommit.setmSha("HashCode: "+jsonArray.getJSONObject(i).getString("sha"));
+                newCommit.setmSha("Commit Hash: "+jsonArray.getJSONObject(i).getString("sha"));
                 newCommit.setmAuthor("Author: "+jsonArray.getJSONObject(i).getJSONObject("commit").getJSONObject("author").getString("name"));
                 newCommit.setmMessage("Message: "+jsonArray.getJSONObject(i).getJSONObject("commit").getString("message"));
                 mCommitList.add(newCommit);

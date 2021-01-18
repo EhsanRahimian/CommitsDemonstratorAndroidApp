@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CommitsDemonstratorAndroidApp</string>
-
+    <string name="sha">Sha</string>
+    <string name="author">Author</string>
+    <string name="message">Message</string>
     <string name="fetch">Fetch</string>
 </resources>
